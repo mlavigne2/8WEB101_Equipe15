@@ -47,5 +47,7 @@ Voici la structure recommandée :
 3. Ouvrir index.html dans un navigateur
 4. Depuis l'accueil, cliquer sur "Commencer à jouer" ou ouvrir game.html pour tester la mécanique Smash/Pass.
 
+Site accessible au : https://mlavigne2.github.io/8WEB101_Equipe15/
+
 # Dépendances
 Notre projet ne nécessite aucune dépendance externe.
