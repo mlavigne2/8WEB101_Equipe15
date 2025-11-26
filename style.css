@@ -1,0 +1,143 @@
+/* --- RESET SIMPLE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* --- HEADER --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #101010;
+    color: white;
+}
+.header.small {
+    padding: 15px;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* --- HERO --- */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(45deg, #ff006a, #ff8c00);
+    color: white;
+}
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.hero p {
+    margin-bottom: 30px;
+}
+.btn-primary {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #ff006a;
+    font-weight: bold;
+}
+
+/* --- FEATURED LISTS --- */
+.featured {
+    padding: 40px 20px;
+}
+.featured h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: #f3f3f3;
+    padding: 40px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.card:hover {
+    background: #e9e9e9;
+}
+
+/* --- GAME PAGE --- */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+.character-card {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.character-card img {
+    width: 350px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.name {
+    margin-top: 15px;
+    font-size: 1.8rem;
+}
+.vote-buttons {
+    display: flex;
+    gap: 30px;
+}
+.vote-buttons button {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-pass {
+    background: #a3a3a3;
+    color: white;
+}
+.btn-pass:hover {
+    background: #8e8e8e;
+}
+.btn-smash {
+    background: #ff006a;
+    color: white;
+}
+.btn-smash:hover {
+    background: #d10059;
+}
+
+/* --- FOOTER --- */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #101010;
+    color: #bbb;
+    margin-top: 60px;
+}
