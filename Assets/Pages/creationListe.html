@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Création de liste</title>
+    <link rel="stylesheet" href="../Styles/style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">SmashOrPass.gg</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Jouer</a></li>
+                <li><a href="#">Explorer</a></li>
+                <li><a href="#">Créer une liste</a></li>
+                <li><a href="#">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Créer une nouvelle liste Smash or Pass</h2>
+
+        <form action="" method="post">
+            <label for="list-name">Nom de la liste :</label>
+            <input type="text" id="list-name" name="list-name" required />
+
+            <label for="combatType">Combat aléatoire :</label>
+            <input type="checkbox" name="combatType" id="combatType">
+
+            <fieldset id="opponentsSpace">
+
+            </fieldset>
+
+            <button type="button" id="buttonAjoutDansListe">+</button>
+            
+            <button type="submit" class="btn-primary">Créer la liste</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        © 2025 SmashOrPass.gg
+    </footer>
+
+    <script src="../Scripts/creationListe.js"></script>
+</body>
+</html>
