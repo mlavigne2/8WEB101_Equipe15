@@ -1,0 +1,138 @@
+/* ============================================================
+   PAGE CRÉATION DE LISTE
+   (complète le style global défini dans style.css)
+============================================================ */
+
+body {
+    background: #ffffff;
+}
+
+/* Carte contenant le formulaire */
+.creation-liste {
+    max-width: 900px;
+    margin: 40px auto 60px auto;
+    background: #f3f3f3;      /* même gris que les cards */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    padding: 30px 32px 26px 32px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.creation-liste h2 {
+    font-size: 2rem;
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+/* Formulaire */
+.creation-liste form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #101010;
+}
+
+/* Labels */
+.creation-liste form label {
+    font-weight: 600;
+}
+
+/* Champ texte */
+.creation-liste form input[type="text"] {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #a3a3a3; /* même gris que btn PASS */
+    background: #ffffff;
+    color: #101010;
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.creation-liste form input[type="text"]:focus {
+    border-color: #ff66a6;
+    box-shadow: 0 0 0 2px rgba(255, 102, 166, 0.35);
+}
+
+/* Checkbox combat aléatoire */
+#combatType {
+    margin-left: 8px;
+    transform: scale(1.1);
+    cursor: pointer;
+    accent-color: #ff66a6;
+}
+
+/* Zone des adversaires (remplie par le JS) */
+#opponentsSpace {
+    margin-top: 5px;
+    padding: 15px 18px;
+    min-height: 90px;
+    border-radius: 10px;
+    border: 1px dashed #ff66a6;
+    background: #ffffff;
+}
+
+/* Style de base pour un adversaire (si tu ajoutes .opponent-item en JS) */
+#opponentsSpace .opponent-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #e9e9e9; /* comme le hover des cards */
+    font-size: 0.95rem;
+}
+
+/* Bouton + */
+#buttonAjoutDansListe {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(45deg, #ff006a, #ff8c00); /* même dégradé que le hero */
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-top: 8px;
+}
+
+/* Effet hover / click */
+#buttonAjoutDansListe:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55);
+}
+
+#buttonAjoutDansListe:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Bouton "Créer la liste" dans la carte */
+.creation-liste .btn-primary {
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .creation-liste {
+        margin: 20px 16px 40px 16px;
+        padding: 22px 18px 20px 18px;
+    }
+
+    .creation-liste h2 {
+        font-size: 1.7rem;
+    }
+
+    .creation-liste .btn-primary {
+        width: 100%;
+        text-align: center;
+        align-self: stretch;
+    }
+}
