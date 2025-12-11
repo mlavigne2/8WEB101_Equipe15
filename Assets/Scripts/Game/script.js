@@ -1,22 +1,3 @@
-// --- LISTE DE PERSONNAGES (exemple simple) ---
-const characters = [
-    {
-        name: "Mario",
-        img: "img/Mario.jpg"
-    },
-    {
-        name: "Pikachu",
-        img: "img/Pikachu.jpg"
-    },
-    {
-        name: "Pringles crème sûre et oignon",
-        img: "img/Pringles.jpg"
-    }
-];
-
-// Position actuelle
-let index = 0;
-
 // Sélection des éléments HTML
 const imgEl = document.querySelector(".character-card img");
 const nameEl = document.querySelector(".name");
@@ -25,15 +6,32 @@ const btnSmash = document.querySelector(".btn-smash");
 const btnPass = document.querySelector(".btn-pass");
 const progressEl = document.querySelector(".progress");
 
-// Mise à jour de l’affichage au début
-updateCharacter();
+const urlParams = new URLSearchParams(window.location.search);
+const listeId = urlParams.get('list_id');
+
+let characters;
+
+// Position actuelle
+let index = 0;
+
+// Récupération des concurents depuis la BDD depuis la BDD
+fetch('../Scripts/Game/retrieveOpponents.php?list_id=' + listeId)
+    .then(response => response.json())
+    .then(data => {
+        characters = data;
+        
+        // Mise à jour de l’affichage au début
+        updateCharacter();   
+    })
+    .catch(error => console.error('Error fetching data:', error))
+;
 
 // --- CHARGER LE PERSONNAGE SUIVANT ---
 function updateCharacter() {
     const character = characters[index];
     
-    imgEl.src = character.img;
-    nameEl.textContent = character.name;
+    imgEl.src = character["image_path"];
+    nameEl.textContent = character["nom"];
 
     progressEl.textContent = `${index + 1} / ${characters.length}`;
 }
