@@ -1,17 +1,46 @@
 <?php
-function uploadOnServeur(string $nomEnregistrement, string $nomTemporaire) : bool {
+function uploadOnServeur(string $baseFolder, string $nomEnregistrement, string $nomTemporaire, string $listName) : array {
+    // Check si le dossier cible n'a pas déjà été défini
+    if ($baseFolder === "Images/Listes/") {
+        // Check si un dossier avec le nom de la liste existe déjà, si oui en crée un autre et le crée sinon.
+        if (!is_dir("../../Images/Listes/{$listName}")) {
+            mkdir("../../Images/Listes/{$listName}", 0777, true);
+            $baseFolder = "Images/Listes/{$listName}";
+        } else {
+            $folder_path = "Images/Listes/{$listName}";
+            $compteur = 1;
+
+            while (is_dir("../../{$folder_path}")) {
+                $folder_path .= $compteur;
+                $compteur++;
+            }
+
+            mkdir("../../{$folder_path}", 0777, true);
+            $baseFolder = $folder_path;
+        }
+    }
+    
+    if (is_file("../../{$baseFolder}/{$nomEnregistrement}")) {
+        $compteur = 1;
+
+        while (is_file("../../{$baseFolder}/{$nomEnregistrement}")) {
+            $nomEnregistrement = $compteur.$nomEnregistrement;
+            $compteur++;
+        }
+    }
+
     // Upload des images dans le répertoire de la liste
-    if (move_uploaded_file($nomTemporaire, "../../Images/Listes/".$nomEnregistrement)) {
-        return True;
+    if (move_uploaded_file($nomTemporaire, "../../{$baseFolder}/{$nomEnregistrement}")) {
+        return [$baseFolder, "{$baseFolder}/{$nomEnregistrement}"];
     } else {
-        throw new Exception("Echec du transfert du fichier '$nomEnregistrement' sur le serveur.", 1);
-        return False;
+        throw new Exception("Echec du transfert du fichier '$nomEnregistrement' sur le serveur au chemin {$baseFolder}.", 1);
+        return [$baseFolder, "{$baseFolder}/{$nomEnregistrement}"];
     }
 }
 
 // Si le formulaire à été soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $dossierCible = "Images/Listes/";
+    $dossierBase = "Images/Listes/";
 
     // Récupération des champs du formulaire
     // Récupération des champs généraux de la liste
@@ -37,7 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // Upload de la vignette de la liste
-    uploadOnServeur($nomFichier, $nomTemporaire);
+    $retour = uploadOnServeur($dossierBase, $nomFichier, $nomTemporaire, $listName);
+    $dossierBase = $retour[0];
+    $dossierCible = $retour[1];
 
 
     // Connexion à la base de données
@@ -54,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Préparation et exécution de la requête d'insertion
     $listeInsertQuery = $conn->prepare("INSERT INTO listes (nom, vignette_path, combat_mode) VALUES (?, ?, ?)");
-    $vignettePath = $dossierCible.$nomFichier;
+    $vignettePath = $dossierCible;
     $listeInsertQuery->bind_param("sss", $listName, $vignettePath, $combatMode);
 
     // Insertion des données dans la base de données
@@ -78,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $idConcurrent = $key;
             $nomConcurrent = filter_var($value, FILTER_SANITIZE_STRING);
             
-            $idImage = "image".substr($idConcurrent, -1);
+            $idImage = "image".substr($idConcurrent, 3);
             if (isset($_FILES[$idImage]) && $_FILES[$idImage]["error"] == 0) {
                 $nomFichier = $nomConcurrent;
                 $nomTemporaire = $_FILES[$idImage]["tmp_name"];
@@ -89,10 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             // Upload de l'image du concurrent
-            uploadOnServeur($nomFichier, $nomTemporaire);
+            $retour = uploadOnServeur($dossierBase, $nomFichier, $nomTemporaire, $listName);
+            $dossierBase = $retour[0];
+            $dossierCible = $retour[1];
             
             // Bind parameters
-            $dossierImageConcurrent = "../".$dossierCible.$nomFichier;
+            $dossierImageConcurrent = "../{$dossierCible}";
             $nbSmash = 0;
             $nbPass = 0;
             $concurrentInsertQuery->bind_param("ssss", $nomConcurrent, $dossierImageConcurrent, $nbSmash, $nbPass);
