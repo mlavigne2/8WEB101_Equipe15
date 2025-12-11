@@ -23,15 +23,25 @@
     <section>
         <h2>Créer une nouvelle liste Smash or Pass</h2>
 
-        <form action="" method="post">
-            <label for="list-name">Nom de la liste :</label>
-            <input type="text" id="list-name" name="list-name" required />
+        <form action="../Scripts/CreationListes/creationListes.php" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Informations générale de la liste</legend>
 
-            <label for="combatType">Combat aléatoire :</label>
-            <input type="checkbox" name="combatType" id="combatType">
+                <label for="list-name">Nom de la liste :</label>
+                <input type="text" name="list-name" required id="list-name"/>
 
-            <fieldset id="opponentsSpace">
+                <label for="list-vignette">Vignette de la liste :</label>
+                <input type="file" accept="image/*" name="list-vignette" required id="list-vignette"/>
 
+                <!--<label for="combat-mode">Mode combat :</label>
+                <input type="checkbox" name="combat-mode" id="combat-mode">-->
+            </fieldset>
+            
+            <fieldset>
+                <legend>Concurrents de la liste</legend>
+
+                <section id="opponentsSpace">
+                </section>
             </fieldset>
 
             <button type="button" id="buttonAjoutDansListe">+</button>
@@ -44,6 +54,6 @@
         © 2025 SmashOrPass.gg
     </footer>
 
-    <script src="../Scripts/creationListe.js"></script>
+    <script src="../Scripts/CreationListes/creationListes.js"></script>
 </body>
 </html>
