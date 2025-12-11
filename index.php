@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         echo '
         <div class="card">
-            <a href="./Assets/Pages/game.php?list_id='.$row["id"].'">
+            <a href="./Assets/Pages/game.html?list_id='.$row["id"].'">
                 <img src="./Assets/'.$row["vignette_path"].'" alt="Vignette de la liste">
                 <p>'.$row["nom"].'</p>
             </a>
