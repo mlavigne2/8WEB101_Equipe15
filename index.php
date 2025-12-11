@@ -1,4 +1,17 @@
 <?php
+// Connexion à la base de données
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "smashorpassdb";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connexion échouée: " . $conn->connect_error);
+}
+
+// Echo de la page partie 1
 echo '
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,25 +38,29 @@ echo '
     <section class="hero">
         <h1>Vote. Partage. Classe.</h1>
         <p>La plateforme dédiée pour créer et jouer à des listes Smash or Pass.</p>
-        <a href="./Assets/Pages/game.html" class="btn-primary">Commencer à jouer</a>
-    </section>
-
-    <section class="featured">
-        <h2>Listes disponibles</h2>
-        <div class="cards">
 ';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "smashorpassdb";
+// Récupération d'un id de liste aléatoire
+$sql = "SELECT * FROM listes ORDER BY RAND() LIMIT 1;";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$result = mysqli_query($conn, $sql);
 
-if ($conn->connect_error) {
-    die("Connexion échouée: " . $conn->connect_error);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '
+                <a href="./Assets/Pages/game.html?list_id='.$row["id"].'" class="btn-primary">Commencer à jouer</a>
+            </section>
+
+            <section class="featured">
+                <h2>Listes disponibles</h2>
+                <div class="cards">
+        ';
+    }
+} else {
+    echo "0 results";
 }
 
+// Récupération et affichage des listes depuis la base de données
 $sql = "SELECT id, nom, vignette_path FROM listes";
 
 $result = mysqli_query($conn, $sql);
@@ -64,6 +81,7 @@ if (mysqli_num_rows($result) > 0) {
 
 $conn->close();
 
+// Echo de la page partie 2
 echo '</div>
     </section>
 
