@@ -1,3 +1,5 @@
+<?php
+echo '
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,21 +25,51 @@
     <section class="hero">
         <h1>Vote. Partage. Classe.</h1>
         <p>La plateforme dédiée pour créer et jouer à des listes Smash or Pass.</p>
-        <a href="game.html" class="btn-primary">Commencer à jouer</a>
+        <a href="./Assets/Pages/game.html" class="btn-primary">Commencer à jouer</a>
     </section>
 
     <section class="featured">
-        <h2>Listes Populaires</h2>
+        <h2>Listes disponibles</h2>
         <div class="cards">
-            <div class="card">Liste 1</div>
-            <div class="card">Liste 2</div>
-            <div class="card">Liste 3</div>
-            <div class="card">Liste 4</div>
-        </div>
+';
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "smashorpassdb";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connexion échouée: " . $conn->connect_error);
+}
+
+$sql = "SELECT id, nom, vignette_path FROM listes";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '
+        <div class="card">
+            <a href="./Assets/Pages/game.php?list_id='.$row["id"].'">
+                <img src="./Assets/'.$row["vignette_path"].'" alt="Vignette de la liste">
+                <p>'.$row["nom"].'</p>
+            </a>
+        </div>';
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+
+echo '</div>
     </section>
 
     <footer class="footer">
         © 2025 SmashOrPass.gg
     </footer>
 </body>
-</html>
+</html>';
+?>
