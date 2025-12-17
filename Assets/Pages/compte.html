@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon compte – SmashOrPass.gg</title>
+    <link rel="stylesheet" href="../Styles/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+    <div class="logo"><a href="../../index.php">SmashOrPass.gg</a></div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="../../index.php">Jouer</a></li>
+            <li><a href="explorer.php">Explorer</a></li>
+            <li><a href="creationListe.html">Créer une liste</a></li>
+            <li><a href="compte.html">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+    <main class="account-container fade-in">
+
+        <h1>Connexion</h1>
+        <p class="subtitle">Accédez à votre compte pour créer, jouer et gérer vos listes.</p>
+
+        <form class="account-form" action="#" method="post">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" required placeholder="exemple@mail.com">
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required placeholder="Votre mot de passe">
+
+            <button type="submit" class="btn-primary">Se connecter</button>
+
+            <p class="switch-form">
+                Pas encore de compte ? 
+                <a href="#" id="switchToRegister">Créer un compte</a>
+            </p>
+        </form>
+
+        <!-- FORMULAIRE INSCRIPTION (CACHÉ PAR DÉFAUT) -->
+        <form class="account-form hidden" id="registerForm" action="#" method="post">
+            <h2>Créer un compte</h2>
+
+            <label for="reg-email">Adresse email</label>
+            <input type="email" id="reg-email" name="email" required>
+
+            <label for="reg-password">Mot de passe</label>
+            <input type="password" id="reg-password" name="password" required>
+
+            <label for="reg-confirm">Confirmer le mot de passe</label>
+            <input type="password" id="reg-confirm" name="password_confirm" required>
+
+            <button type="submit" class="btn-primary">Créer un compte</button>
+
+            <p class="switch-form">
+                Déjà inscrit ?
+                <a href="#" id="switchToLogin">Se connecter</a>
+            </p>
+        </form>
+
+    </main>
+
+    <footer class="footer">
+        © 2025 SmashOrPass.gg
+    </footer>
+
+    <script>
+        // Gestion affichage connexion <-> inscription
+        const loginForm = document.querySelector('.account-form');
+        const registerForm = document.getElementById('registerForm');
+
+        document.getElementById('switchToRegister').onclick = (e) => {
+            e.preventDefault();
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        };
+
+        document.getElementById('switchToLogin').onclick = (e) => {
+            e.preventDefault();
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        };
+    </script>
+
+</body>
+</html>

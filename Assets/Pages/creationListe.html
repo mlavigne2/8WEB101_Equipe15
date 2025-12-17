@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Création de liste</title>
+    <link rel="stylesheet" href="../Styles/style.css" />
+</head>
+
+<body>
+    <header class="header">
+    <div class="logo"><a href="../../index.php">SmashOrPass.gg</a></div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="../../index.php">Jouer</a></li>
+            <li><a href="explorer.php">Explorer</a></li>
+            <li><a href="creationListe.html">Créer une liste</a></li>
+            <li><a href="compte.html">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+
+
+    <section class="creation-container">
+
+        <h2>Créer une nouvelle liste Smash or Pass</h2>
+
+        <form action="../Scripts/CreationListes/creationListes.php" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Informations générale de la liste</legend>
+
+                <label for="list-name">Nom de la liste :</label>
+                <input type="text" name="list-name" required id="list-name"/>
+
+                <label for="list-vignette">Vignette de la liste :</label>
+                <input type="file" accept="image/*" name="list-vignette" required id="list-vignette"/>
+
+                <!--<label for="combat-mode">Mode combat :</label>
+                <input type="checkbox" name="combat-mode" id="combat-mode">-->
+            </fieldset>
+            
+            <fieldset>
+                <legend>Concurrents de la liste</legend>
+
+                <section id="opponentsSpace">
+                </section>
+            </fieldset>
+
+            <button type="button" id="buttonAjoutDansListe">+</button>
+            
+            <button type="submit" class="btn-primary">Créer la liste</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        © 2025 SmashOrPass.gg
+    </footer>
+
+    <script src="../Scripts/CreationListes/creationListes.js"></script>
+</body>
+</html>
