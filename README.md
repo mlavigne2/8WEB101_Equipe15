@@ -6,8 +6,6 @@
 ---
 5. Depuis l'accueil, cliquer sur "Commencer à jouer" pour choisir une liste aléatoire, cliquez sur une des liste disponible dans la catégorie "Listes disponible" de la page d'accueil ou sur "Créer une liste" pour créer votre propre liste.
 
-Site accessible au : https://mlavigne2.github.io/8WEB101_Equipe15/
-
 # Technologies utilisées
 ### 1. HTML5    
 Utilisé pour structurer les pages d'accueil et de jeu ainsi que pour la mise en page générale du contenu.
